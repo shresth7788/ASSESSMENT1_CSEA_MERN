@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylesheet.css">
+    <script href="script.js" defer></script>
+    <title>Resume Preview</title>
+</head>
+<body>
+    <h1>Resume Builder</h1>
+    <div class="resume-form">
+        <form>
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name"><br>
+
+            <label for="email">Email:</label><br>
+            <input type="text" id="email" email="email"><br>
+
+            <label for="phoneno">Phone Number:</label><br>
+            <input type="tel" id="phoneno" phoneno="phoneno"><br>
+
+            <label for="linkedin">LinkedIn ID:</label><br>
+            <input type="url" id="linkedin" linkedin="linkedin"><br>
+
+            <label for="github">Github ID:</label><br>
+            <input type="url" id="github" github="github"><br>
+
+            <label for="work_exp">Work Experience:</label><br>
+            <input type="text" id="work_exp" work_exp="work_exp"><br>
+
+            <label for="education">Education:</label><br>
+            <input type="text" id="education" education="education"><br>
+
+            <label for="photo">Upload Photo:</label><br>
+            <input type="file" id="photo" accept="image/*"><br>
+
+            <button onclick="generateResume()">Generate Resume</button>
+        </form>
+    </div>
+</body>
+</html>
