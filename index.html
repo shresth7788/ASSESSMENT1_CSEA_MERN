@@ -1,46 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="stylesheet.css">
-    <script src="script.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.js.min.js" defer></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Resume Builder</title>
-</head>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Resume Builder</h1>
+      <form id="resume-form">
+        <label for="name">Name:</label>
+        <input type="text" placeholder="Enter name" id="name" required />
 
-<body>
-    <h1>Resume Builder</h1>
-    <div id="resume-form">
-        <form id="form">
-            <label for="name">Name:</label><br>
-            <input type="text" id="name" name="name"><br>
+        <label for="email">Email:</label>
+        <input type="email" placeholder="Enter email" id="email" required />
 
-            <label for="email">Email:</label><br>
-            <input type="text" id="email" email="email"><br>
+        <label for="phone">Phone Number:</label>
+        <input type="tel" placeholder="Enter phone no." id="phone" required />
 
-            <label for="phoneno">Phone Number:</label><br>
-            <input type="tel" id="phoneno" phoneno="phoneno"><br>
+        <label for="linkedin">LinkedIn Profile:</label>
+        <input type="url" placeholder="Enter URL" id="linkedin" />
 
-            <label for="linkedin">LinkedIn ID:</label><br>
-            <input type="url" id="linkedin" linkedin="linkedin"><br>
+        <label for="github">GitHub Profile:</label>
+        <input type="url" placeholder="Enter GitHub URL" id="github" />
 
-            <label for="github">Github ID:</label><br>
-            <input type="url" id="github" github="github"><br>
+        <label for="experience">Work Experience:</label>
+        <textarea id="experience" placeholder="Describe your job responsibilities" rows="4"></textarea>
 
-            <label for="work_exp">Work Experience:</label><br>
-            <input type="text" id="work_exp" work_exp="work_exp"><br>
+        <label for="education">Education:</label>
+        <textarea id="education" placeholder="Enter your education" rows="4"></textarea>
 
-            <label for="education">Education:</label><br>
-            <input type="text" id="education" education="education"><br>
+        <label for="photo">Upload Photo:</label>
+        <input type="file" id="photo" accept="image/*" />
 
-            <label for="photo">Upload Photo:</label><br>
-            <input type="file" id="photo" accept="image/*"><br>
+        <button type="button" onclick="generateResume()">Generate Resume</button>
+      </form>
 
-            <button onclick="generateResume()">Generate Resume</button>
-        </form>
-        <button onclick="downloadPDF()">Download PDF</button>
+      <div class="resume-output" id="resume-output">
+        <!-- <h2>Generated Resume</h2> -->
+        <div class="center-content">
+          <img id="output-photo" alt="Uploaded photo" style="display: none" />
+          <p><strong></strong> <span id="output-name"></span></p>
+        </div>
+        <p><strong>Email:</strong> <span id="output-email"></span></p>
+        <p><strong>Phone:</strong> <span id="output-phone"></span></p>
+        <p><strong>LinkedIn:</strong> <span id="output-linkedin"></span></p>
+        <p><strong>GitHub:</strong> <span id="output-github"></span></p>
+        <p><strong>Experience:</strong> <span id="output-experience"></span></p>
+        <p><strong>Education:</strong> <span id="output-education"></span></p>
+        <button type="button" onclick="downloadResume()">Download Resume</button>
+      </div>
     </div>
-    <div id="resume-content"></div>
-</body>
+
+    <script>
+      function generateResume() {
+        document.getElementById("output-name").textContent = document.getElementById("name").value;
+        document.getElementById("output-email").textContent = document.getElementById("email").value;
+        document.getElementById("output-phone").textContent = document.getElementById("phone").value;
+        document.getElementById("output-linkedin").textContent = document.getElementById("linkedin").value;
+        document.getElementById("output-github").textContent = document.getElementById("github").value;
+        document.getElementById("output-experience").textContent = document.getElementById("experience").value;
+        document.getElementById("output-education").textContent = document.getElementById("education").value;
+        const photoInput = document.getElementById("photo");
+        const outputPhoto = document.getElementById("output-photo");
+        if (photoInput.files && photoInput.files[0]) {
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            outputPhoto.src = e.target.result;
+            outputPhoto.style.display = "block";
+          };
+          reader.readAsDataURL(photoInput.files[0]);
+        } else {
+          outputPhoto.style.display = "none";
+        }
+
+    
+        document.getElementById("resume-form").style.display = "none";
+        document.getElementById("resume-output").style.display = "block";
+      }
+
+      function downloadResume() {
+        const element = document.getElementById('resume-output');
+        html2pdf().from(element).save('resume.pdf');
+      }
+    </script>
+  </body>
 </html>
