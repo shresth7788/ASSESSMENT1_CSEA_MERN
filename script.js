@@ -20,6 +20,19 @@ function generateResume() {
         <p style="text-align:center"><strong>Education:</strong> ${education}</p>
     `;
 
-    document.getElementById("resume-form").innerHTML = resumeContent;
+    document.getElementById("resume-form").removeChild(document.getElementById("form"));
+    document.getElementById("resume-content").innerHTML = resumeContent;
+}
+
+function downloadPDF() {
+    const resumeElement = document.getElementById("resume-content");
+    let opt = {
+        margin:       1,
+        filename:     'my-invoice.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2 },
+        jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+    };
+    html2pdf().set(opt).from(element).save();
 }
 

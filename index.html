@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="stylesheet.css">
     <script src="script.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.js.min.js" defer></script>
     <title>Resume Builder</title>
 </head>
+
 <body>
     <h1>Resume Builder</h1>
     <div id="resume-form">
-        <form>
+        <form id="form">
             <label for="name">Name:</label><br>
             <input type="text" id="name" name="name"><br>
 
@@ -37,6 +39,8 @@
 
             <button onclick="generateResume()">Generate Resume</button>
         </form>
+        <button onclick="downloadPDF()">Download PDF</button>
     </div>
+    <div id="resume-content"></div>
 </body>
 </html>
